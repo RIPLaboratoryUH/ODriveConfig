@@ -1,4 +1,4 @@
-TO config the ODrive, first install ODriveTool by following the instructions here: https://docs.odriverobotics.com/v/latest/interfaces/odrivetool.html
+To config the ODrive, first install ODriveTool by following the instructions here: https://docs.odriverobotics.com/v/latest/interfaces/odrivetool.html
 
 Note that it is easiest to install teh tool globally, even though Linux will warn you against it.
 
