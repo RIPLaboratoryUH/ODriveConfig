@@ -2,10 +2,11 @@
 odrv = odrv0
 odrv.erase_configuration()
 #Run these blocks one chuck at at time
+odrv = odrv0
 odrv.reboot()
 #Wait for reboot
 odrv = odrv0
-odrv.axis0.config.can.node_id = 16
+odrv.axis0.config.can.node_id = 16 #Change this!!!!
 odrv.config.dc_bus_overvoltage_trip_level = 35
 odrv.config.dc_bus_undervoltage_trip_level = 10.5
 odrv.config.dc_max_positive_current = 100
