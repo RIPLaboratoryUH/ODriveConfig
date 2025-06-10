@@ -1,8 +1,9 @@
+#These commands are meant to be run once the ODriveTool is launched in your command prompt. 
 odrv = odrv0
 odrv.erase_configuration()
-
+#Run these blocks one chuck at at time
 odrv.reboot()
-
+#Wait for reboot
 odrv = odrv0
 odrv.axis0.config.can.node_id = 16
 odrv.config.dc_bus_overvoltage_trip_level = 35
@@ -42,15 +43,17 @@ odrv.axis0.config.commutation_encoder = EncoderId.RS485_ENCODER0 # confirmed
 odrv.config.enable_uart_a = False
 odrv.axis0.config.torque_soft_max = 1.6 #Limit motor to 1.6 N-ms
 odrv.axis0.controller.config.vel_integrator_limit = 10 
-
+#Verify that this worked and then save
 odrv.save_configuration()
-
+#Wait for reboot
 odrv=odrv0
 odrv.reboot()
-
+#Manual reboot
 odrv=odrv0
 odrv.axis0.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
-
-odrv.save()
-
+#Wait for calibration
+odrv.save_configuration()
+#Wait for reboot
+odrv=odrv0
 odrv.reboot()
+#Done! Try to use the ODrive GUI as a test
