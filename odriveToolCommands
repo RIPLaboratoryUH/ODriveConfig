@@ -1,12 +1,21 @@
 
-#These commands are meant to be run once the ODriveTool is launched in your command prompt. 
+#These commands are for the ODriveTool
+#Run these blocks one chunk at at time to let the ODrive save and reset as required
+
 odrv0.erase_configuration()
 
-#Run these blocks one chuck at at time
 odrv0.reboot()
 
-#Wait for reboot
-odrv0.axis0.config.can.node_id = 16 #Change this!!!!
+# These next lines should be edited for what you need before executing them
+
+odrv0.axis0.config.can.node_id = 16 #19 #0 #This is your CAN node ID
+odrv0.can.config.baud_rate = 250000 #1000000 #This is the BAUD rate on your CAN
+odrv0.config.odrv_fan.enabled = True 
+odrv0.config.odrv_fan.upper = 10 #50 #50/30 is reasonable (turns on at 50C, turns off at 30C), but 10/0 works too (makes the fan always on) 
+odrv0.config.odrv_fan.upper = 0 #30
+
+# End edit block
+
 odrv0.config.dc_bus_overvoltage_trip_level = 35
 odrv0.config.dc_bus_undervoltage_trip_level = 10.5
 odrv0.config.dc_max_positive_current = 100
@@ -29,7 +38,6 @@ odrv0.axis0.config.torque_soft_max = ('inf')
 odrv0.axis0.trap_traj.config.accel_limit = 10
 odrv0.axis0.controller.config.vel_ramp_rate = 10
 odrv0.can.config.protocol = Protocol.SIMPLE
-odrv0.can.config.baud_rate = 250000
 odrv0.axis0.config.can.heartbeat_msg_rate_ms = 100
 odrv0.axis0.config.can.encoder_msg_rate_ms = 10
 odrv0.axis0.config.can.iq_msg_rate_ms = 10
@@ -45,19 +53,14 @@ odrv0.config.enable_uart_a = False
 odrv0.axis0.config.torque_soft_max = 1.6 #Limit motor to 1.6 N-ms
 odrv0.axis0.controller.config.vel_integrator_limit = 10 
 
-#Verify that this worked and then save
 odrv0.save_configuration()
 
-#Wait for reboot
 odrv0.reboot()
 
-#Manual reboot
 odrv0.axis0.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
 
-#Wait for calibration
 odrv0.save_configuration()
 
-#Wait for reboot
 odrv0.reboot()
 
-#Done! Try to use the ODrive GUI as a test
+#Done! Type odrv0.config or odrv0.axis0 to see if the settins you set are displayed
